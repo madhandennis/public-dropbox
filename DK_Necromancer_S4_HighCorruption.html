@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Death Knight Necromancer — High Corruption Guide S4</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg0:   #070510;
+    --bg1:   #0e0b1c;
+    --bg2:   #151128;
+    --bg3:   #1c1735;
+    --bg4:   #231e42;
+    --bone:  #ddd0b8;
+    --bone2: #b8a888;
+    --gold:  #c8a84a;
+    --gold2: #ead870;
+    --void:  #7c4fcf;
+    --void2: #a87fff;
+    --void3: #c8b2ff;
+    --necro: #50cfc6;
+    --red:   #d45050;
+    --green: #4ec987;
+    --warn:  #e0a030;
+    --text:  #cec3b0;
+    --dim:   #7a7060;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg0);
+    color: var(--text);
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  /* sticky nav */
+  .toc-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(7,5,16,0.95);
+    border-bottom: 1px solid rgba(124,79,207,0.4);
+    backdrop-filter: blur(8px);
+    padding: 0 24px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .toc-nav a {
+    color: var(--bone2);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 10px 10px;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .toc-nav a:hover { color: var(--void2); }
+  .toc-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--void2);
+    padding: 10px 12px 10px 0;
+    border-right: 1px solid rgba(124,79,207,0.4);
+    margin-right: 4px;
+    white-space: nowrap;
+  }
+
+  .page { max-width: 1040px; margin: 0 auto; padding: 0 24px 100px; }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 64px 0 40px;
+    text-align: center;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--void), var(--necro), var(--void), transparent);
+    margin-top: 48px;
+  }
+  .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .badge {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .badge-season { background: rgba(124,79,207,0.2); border: 1px solid var(--void); color: var(--void2); }
+  .badge-class   { background: rgba(80,207,198,0.1); border: 1px solid var(--necro); color: var(--necro); }
+  .badge-mode    { background: rgba(200,168,74,0.1); border: 1px solid var(--gold); color: var(--gold); }
+
+  h1.hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900;
+    color: var(--bone);
+    line-height: 1.05;
+    letter-spacing: 3px;
+    text-shadow: 0 0 60px rgba(168,127,255,0.4), 0 4px 16px rgba(0,0,0,0.8);
+    margin-bottom: 6px;
+  }
+  h1.hero-title span { color: var(--void2); }
+  .hero-sub {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
+  .hero-pitch {
+    max-width: 660px;
+    margin: 0 auto;
+    color: var(--dim);
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  /* ===== QUICK STATS ===== */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--void);
+    border: 1px solid var(--void);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 36px 0;
+  }
+  @media (max-width: 600px) { .stat-bar { grid-template-columns: repeat(2, 1fr); } }
+  .stat-cell {
+    background: var(--bg1);
+    padding: 14px 10px;
+    text-align: center;
+  }
+  .stat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .stat-val {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .s-great { color: var(--green); }
+  .s-good  { color: var(--gold); }
+  .s-ok    { color: var(--warn); }
+  .s-bad   { color: var(--red); }
+
+  /* ===== SECTION ===== */
+  .section { margin: 48px 0; }
+  .section-anchor { display: block; height: 72px; margin-top: -72px; }
+
+  h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bone);
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(124,79,207,0.4);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2 .h2-icon {
+    background: linear-gradient(135deg, var(--bg4), var(--void));
+    border: 1px solid var(--void2);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin: 20px 0 10px;
+  }
+
+  /* ===== CALLOUTS ===== */
+  .note {
+    display: flex;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 3px;
+    margin: 16px 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .note-icon { font-size: 20px; flex-shrink: 0; line-height: 1.2; }
+  .note.new   { background: rgba(124,79,207,0.12); border: 1px solid rgba(168,127,255,0.5); color: #d0c0ff; }
+  .note.tip   { background: rgba(78,201,135,0.08); border: 1px solid rgba(78,201,135,0.4); color: #a8e4c8; }
+  .note.warn  { background: rgba(224,160,48,0.08); border: 1px solid rgba(224,160,48,0.4); color: #e8d0a0; }
+  .note.danger{ background: rgba(212,80,80,0.08);  border: 1px solid rgba(212,80,80,0.4);  color: #f0b0b0; }
+
+  .note b { color: inherit; font-weight: 700; }
+  em.glow { color: var(--void2); font-style: normal; font-weight: 600; }
+  em.gold { color: var(--gold2); font-style: normal; font-weight: 600; }
+
+  /* ===== SKILL LAYOUT ===== */
+  .skill-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 620px) { .skill-strip { grid-template-columns: 1fr; } }
+  .skill-card {
+    background: var(--bg2);
+    border: 1px solid rgba(124,79,207,0.35);
+    border-radius: 3px;
+    padding: 16px 18px;
+    position: relative;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--void);
+    border-radius: 3px 0 0 3px;
+  }
+  .skill-card.primary::before { background: linear-gradient(to bottom, var(--gold2), var(--gold)); }
+  .skill-card.support::before { background: linear-gradient(to bottom, var(--necro), #2a9090); }
+  .skill-card.utility::before { background: linear-gradient(to bottom, #888, #444); }
+  .skill-name {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: var(--void2);
+    margin-bottom: 2px;
+  }
+  .skill-role {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-family: 'Cinzel', serif;
+  }
+  .skill-card p { font-size: 14px; color: var(--text); line-height: 1.6; }
+  .skill-card ul { list-style: none; margin-top: 8px; }
+  .skill-card ul li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding-left: 14px;
+    position: relative;
+  }
+  .skill-card ul li::before { content: '›'; position: absolute; left: 0; color: var(--void2); }
+
+  /* ===== NODE TABLE ===== */
+  .node-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 16px; }
+  .node-table thead tr { background: var(--bg4); }
+  .node-table th {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .node-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+  .node-table tr:hover td { background: rgba(124,79,207,0.06); }
+  .nd-name { color: var(--bone); font-weight: 600; }
+  .nd-pts {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--void2);
+    background: var(--bg4);
+    padding: 2px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .nd-why { color: var(--dim); font-style: italic; }
+  .nd-why b { color: var(--bone2); font-style: normal; }
+  .tag {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+  .tag-new  { background: rgba(168,127,255,0.2); border: 1px solid var(--void2); color: var(--void3); }
+  .tag-key  { background: rgba(200,168,74,0.2);  border: 1px solid var(--gold);  color: var(--gold2); }
+  .tag-core { background: rgba(80,207,198,0.15); border: 1px solid var(--necro); color: var(--necro); }
+
+  /* ===== PASSIVE BLOCK ===== */
+  .ptree-block {
+    background: var(--bg1);
+    border: 1px solid rgba(124,79,207,0.3);
+    border-radius: 3px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .ptree-header {
+    background: var(--bg4);
+    padding: 10px 18px;
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(124,79,207,0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .ptree-pts { color: var(--void2); font-size: 11px; }
+  .prow {
+    display: grid;
+    grid-template-columns: 200px 70px 1fr;
+    gap: 10px;
+    padding: 8px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: start;
+    font-size: 14px;
+  }
+  .prow:last-child { border-bottom: none; }
+  .prow-name { color: var(--bone); font-weight: 600; }
+  .prow-pts {
+    background: var(--bg3);
+    color: var(--void2);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    text-align: center;
+    align-self: center;
+  }
+  .prow-why { color: var(--dim); font-style: italic; font-size: 13px; line-height: 1.5; }
+  .prow-why b { color: var(--bone2); font-style: normal; }
+
+  /* ===== GEAR TABLE ===== */
+  .gear-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .gear-table th {
+    background: var(--bg4);
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  .gear-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+  .gear-table tr:hover td { background: rgba(124,79,207,0.06); }
+  .g-slot { font-family: 'Cinzel', serif; font-size: 11px; color: var(--bone2); white-space: nowrap; }
+  .g-unique { color: var(--gold2); font-weight: 700; }
+  .g-rare   { color: var(--necro); }
+  .g-bless  { color: var(--void2); }
+
+  /* ===== TIMELINE ===== */
+  .timeline { padding-left: 30px; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--void2), var(--void), rgba(124,79,207,0));
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 7px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--void2);
+    border: 2px solid var(--bg0);
+    box-shadow: 0 0 10px var(--void);
+  }
+  .tl-range {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--void2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .tl-title {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .tl-body { font-size: 15px; color: var(--text); }
+  .tl-body b { color: var(--bone); }
+
+  /* ===== SYNERGY CARDS ===== */
+  .syn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 580px) { .syn-grid { grid-template-columns: 1fr; } }
+  .syn-card {
+    background: var(--bg2);
+    border: 1px solid rgba(124,79,207,0.4);
+    border-radius: 3px;
+    padding: 14px 16px;
+  }
+  .syn-a { font-family: 'Cinzel', serif; font-size: 11px; color: var(--gold); margin-bottom: 2px; }
+  .syn-arrow { color: var(--void2); text-align: center; font-size: 18px; padding: 4px 0; }
+  .syn-b { font-family: 'Cinzel', serif; font-size: 11px; color: var(--necro); margin-bottom: 8px; }
+  .syn-desc { font-size: 13px; color: var(--dim); font-style: italic; line-height: 1.5; }
+
+  /* ===== PRIORITY LIST ===== */
+  .pri-list { list-style: none; }
+  .pri-list li {
+    display: flex;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 15px;
+    align-items: flex-start;
+  }
+  .pri-list li:last-child { border-bottom: none; }
+  .pri-num {
+    background: linear-gradient(135deg, var(--bg4), var(--void));
+    color: var(--bone);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .pri-list b { color: var(--gold); }
+
+  /* ===== TWO COL ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+  .info-box {
+    background: var(--bg2);
+    border: 1px solid rgba(124,79,207,0.3);
+    border-radius: 3px;
+    padding: 14px 16px;
+  }
+  .info-box-title {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    color: var(--bone2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(124,79,207,0.3);
+  }
+  .info-box ul { list-style: none; }
+  .info-box ul li {
+    font-size: 14px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+  }
+  .info-box ul li:last-child { border-bottom: none; }
+  .info-box ul li::before { content: '⟡ '; color: var(--void); }
+
+  /* ===== VERDICT BOX ===== */
+  .verdict {
+    background: linear-gradient(135deg, var(--bg3), var(--bg4));
+    border: 1px solid var(--void2);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+  .verdict-title {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    color: var(--void2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .verdict p { font-size: 15px; color: var(--text); margin-bottom: 8px; }
+  .verdict p:last-child { margin-bottom: 0; }
+
+  /* ===== ARMOR SHRED BOX ===== */
+  .mechanic-box {
+    background: var(--bg2);
+    border-left: 3px solid var(--necro);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 3px 3px 0;
+  }
+  .mechanic-title {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    color: var(--necro);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .mechanic-box p { font-size: 14px; color: var(--text); }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    border-top: 1px solid rgba(124,79,207,0.3);
+    padding-top: 32px;
+    margin-top: 64px;
+    color: var(--dim);
+    font-size: 13px;
+  }
+  .footer p { margin-bottom: 6px; }
+  .footer .glow { color: var(--void2); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="toc-nav">
+  <span class="toc-brand">☽ DK Necro S4</span>
+  <a href="#overview">Overview</a>
+  <a href="#patch-changes">Patch Changes</a>
+  <a href="#skills">Skills</a>
+  <a href="#skill-trees">Skill Trees</a>
+  <a href="#passives">Passives</a>
+  <a href="#synergies">Synergies</a>
+  <a href="#leveling">Leveling</a>
+  <a href="#gear">Gear</a>
+  <a href="#blessings">Blessings</a>
+  <a href="#endgame">High Corruption</a>
+  <a href="#tips">Tips</a>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge-row">
+      <span class="badge badge-season">☽ Season 4 · Shattered Omens · 1.4</span>
+      <span class="badge badge-class">Acolyte · Necromancer</span>
+      <span class="badge badge-mode">Softcore · High Corruption</span>
+    </div>
+    <h1 class="hero-title">Death Knight<br><span>Necromancer</span></h1>
+    <div class="hero-sub">Veteran Season Starter · Corruption Pusher</div>
+    <p class="hero-pitch">A permanent, walk-forward minion army anchored by hybrid melee/soul-casting Death Knights. Season 4's Death Blossom rework turns your DKs into autonomous casters of your own Hungering Souls tree — they shred armour, inflict possession, and kill everything. You walk behind them, push corruption, and occasionally press two buttons.</p>
+  </div>
+
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="stat-cell"><div class="stat-label">Playstyle</div><div class="stat-val s-great">Lazy Army</div></div>
+    <div class="stat-cell"><div class="stat-label">Complexity</div><div class="stat-val s-great">Low</div></div>
+    <div class="stat-cell"><div class="stat-label">Clear Speed</div><div class="stat-val s-good">Strong</div></div>
+    <div class="stat-cell"><div class="stat-label">Boss Dmg</div><div class="stat-val s-good">Very Good</div></div>
+    <div class="stat-cell"><div class="stat-label">Survivability</div><div class="stat-val s-great">Excellent</div></div>
+    <div class="stat-cell"><div class="stat-label">Gear Req.</div><div class="stat-val s-great">Very Low</div></div>
+    <div class="stat-cell"><div class="stat-label">Corruption Ceil</div><div class="stat-val s-good">300–500+</div></div>
+    <div class="stat-cell"><div class="stat-label">Dmg Type</div><div class="stat-val s-ok">Phys / Necro</div></div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="section">
+    <span class="section-anchor" id="overview"></span>
+    <h2><span class="h2-icon">📜</span>Build Overview & High-Corruption Context</h2>
+
+    <p>This build centres on <em class="gold">Summon Skeletal Mage</em> specced fully into <em class="glow">Death Knights</em> — permanent, sword-wielding undead elites that are the highest single-target melee DPS available to Necromancer. In Season 4 they also cast Hungering Souls from your own skill tree every 6 seconds via the <em class="glow">Death Blossom</em> node, making them hybrid threat-generators that clear packs AND melt bosses without any input from you.</p>
+
+    <div class="note warn">
+      <div class="note-icon">⚠️</div>
+      <div><b>Honest High-Corruption Ceiling:</b> Full minion zoo builds have historically struggled past 200–300 corruption without significant investment. <b>This is still true in 1.4</b> — the passive tree changes (Undead Legion, Tyrant's Legion, Disciples of Necromancy all now require 3 points vs. 1) cost efficiency. That said, a focused Death Knight build (not a broad zoo) with proper defensive layering has reached 400–500+ corruption in prior seasons, and <b>S4 buffs to DKs specifically are net positive</b>. Budget 300 as a comfortable expectation; 500 requires good gear and knowledge of fight mechanics.</div>
+    </div>
+
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Hidden DPS buff (Maxroll-confirmed):</b> EHG removed the hidden <b>14% less damage modifier</b> that was on all Skeletal Mages, Pyromancers, and Cryomancers. This includes Death Knights, who are Skeletal Mages. This is effectively a straight ~16% more damage buff on top of all the other changes.</div>
+    </div>
+
+    <div class="verdict">
+      <div class="verdict-title">⚔️ Why This Build Works for Your Goals</div>
+      <p>You want to push corruption fast with minimal stress. The army handles all trash with zero input; you use <em class="glow">Grave Passage</em> as a movement skill (built into Skeletal Mage tree, freeing a full skill slot), set up <em class="glow">Dread Shade</em> on your strongest DK, and cast <em class="glow">Bone Curse</em> on bosses for massive armour shred. The builds you need to watch out for are those that die to oneshots — this build avoids that by having the army draw all aggro while you stand back with strong Ward generation from Soul Drinker and Reclamation of Souls.</p>
+      <p>Unlike zoo builds that spread passive points thin trying to maintain 10+ different minion types, this build concentrates everything into 2–3 synergistic minion types, making the point budget manageable despite the 1.3/1.4 node cost increases.</p>
+    </div>
+  </div>
+
+  <!-- PATCH CHANGES -->
+  <div class="section">
+    <span class="section-anchor" id="patch-changes"></span>
+    <h2><span class="h2-icon">📋</span>All Relevant 1.4 Patch Changes</h2>
+
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Skeletal Mage / Death Knights:</b> Removed the hidden <b>14% less damage modifier</b> on all Skeletal Mages (Death Knights included). Effectively ~16% more damage baseline.</div>
+    </div>
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Death Blossom:</b> Now causes Death Knights to cast Hungering Souls using <b>your Hungering Souls skill tree</b>, with a <b>6 second cooldown</b> (previously cast a different subskill "Haunt" with an 8s cooldown). DKs are now full hybrid melee/casters scaling from your own tree.</div>
+    </div>
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Grave Passage pathing changed</b> — now requires <b>Argonautic Speed</b> (from requiring Forbidden Arcana). Check the current tree before investing to route correctly.</div>
+    </div>
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Leech Life</b> now grants <b>1% life leech per point</b> (from 0.5%) and <b>15% more health per point</b> (from 15% increased). Double the leech efficiency — Death Knights are significantly harder to kill in endgame.</div>
+    </div>
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Amalgam of Rogues</b> now also grants <b>8% increased cast speed per point</b> in addition to attack/movement speed. More fluid Hungering Souls casts from DKs.</div>
+    </div>
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Unbound Necromancy (Necro Passive):</b> Reworked in 1.3 and further changed. Now a 5-point node granting <b>+8% chance for Summoned Skeletons to resummon 3 seconds after death per point</b>. The <b>+1 max skeleton</b> effect is now a <b>3-point threshold bonus</b>. The +2% crit chance per point mentioned in the Maxroll 1.4 summary applies to the skill tree version — verify in-game at launch. Key note: you now need 3 points to get the skeleton count bonus, not 1.</div>
+    </div>
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Marrow Tap (Necro Passive):</b> Now grants <b>+15% Physical Resistance per point</b> (from +10%). Max 4 points (from 5). Excellent defensive node that's now more efficient.</div>
+    </div>
+    <div class="note new">
+      <div class="note-icon">⚡</div>
+      <div><b>Dread Phalanx (Skeleton tree):</b> As of 1.0 patch this already granted 40% more health. Confirm current values at launch — skeleton warrior buffs have shifted between patches. The Maxroll 1.4 notes confirm the hidden mage damage debuff removal is the main across-the-board buff.</div>
+    </div>
+    <div class="note warn">
+      <div class="note-icon">⚠️</div>
+      <div><b>Passive Point Costs Increased (1.3):</b> Undead Legion, Tyrant's Legion, and Disciples of Necromancy all now require <b>3 points each</b> (from 1). This means getting +1 max skeleton costs 3 passive points, and +1 max Death Knight (Disciples) costs 3 points. Factor this into your passive budget — this is NOT a 1.4 change, it was 1.3, but some guides still show old 1-point costs.</div>
+    </div>
+    <div class="note warn">
+      <div class="note-icon">⚠️</div>
+      <div><b>Sharpened Bones replaces Soul Drinker (1.3):</b> The old Soul Drinker (Ward on minion spell hit) was replaced. Sharpened Bones now gives <b>+1% minion crit chance per point</b> (5 pts max). Adjust your Ward generation strategy — rely on Reclamation of Souls and Twisted Heart of Uhkeiros instead.</div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <span class="section-anchor" id="skills"></span>
+    <h2><span class="h2-icon">🎯</span>Skill Bar — Final 5 Slots</h2>
+
+    <div class="note tip">
+      <div class="note-icon">💡</div>
+      <div><b>Grave Passage frees a skill slot.</b> Because Summon Skeletal Mage gains a blink via Grave Passage, you don't need Transplant in endgame. Your 5 skills are: DK summoner + blink, Skeleton Warriors, Bone Golem, Hungering Souls, and Dread Shade — a complete package.</div>
+    </div>
+
+    <div class="skill-strip">
+
+      <div class="skill-card primary">
+        <div class="skill-name">Summon Skeletal Mage</div>
+        <div class="skill-role">⚔️ Primary · Death Knight Command</div>
+        <p>Your most important skill. Specialised entirely into the Death Knight conversion path. This skill is also your movement ability via Grave Passage and it brings your whole army with you via Death's Cavalry. Cast it to blink into position, summon replacement DKs when they fall, and keep the army moving through the Monolith.</p>
+        <ul>
+          <li><b>Death Knights</b> — core conversion node, take first</li>
+          <li><b>Argonautic Speed → Grave Passage</b> — blink movement (pathing changed in 1.4)</li>
+          <li><b>Death's Cavalry</b> — teleport up to 9 minions with you on blink</li>
+          <li><b>Leech Life</b> — 1% leech + 15% more HP per point (buffed in 1.4)</li>
+          <li><b>Death Blossom</b> — DKs cast your Hungering Souls tree every 6s (S4 rework)</li>
+          <li><b>Celer Mortis</b> — crit chance + movement speed for DKs</li>
+          <li><b>Disciples of Necromancy</b> — +1 max DK (costs 3pts in 1.3+)</li>
+        </ul>
+      </div>
+
+      <div class="skill-card primary">
+        <div class="skill-name">Hungering Souls</div>
+        <div class="skill-role">💥 Primary · Death Blossom Engine</div>
+        <p>This skill is the linchpin of the Death Blossom synergy. Every node you take here affects both your own casts AND your Death Knights' autonomous casts every 6 seconds. Spec it entirely for damage and possession — the debuffs stack across multiple DKs firing simultaneously.</p>
+        <ul>
+          <li><b>Consuming Souls</b> — flat necrotic damage (scales DK procs)</li>
+          <li><b>Haunting Souls</b> — slow + debuff on possessed enemies</li>
+          <li><b>Frenzied Skulls</b> — more projectiles per cast (DKs fire more souls)</li>
+          <li><b>Infecting Grasp</b> — longer possession = permanent debuff uptime</li>
+          <li><b>Soul Cleave</b> — AoE on already-possessed targets</li>
+        </ul>
+      </div>
+
+      <div class="skill-card support">
+        <div class="skill-name">Summon Skeleton</div>
+        <div class="skill-role">🛡️ Support · Frontline Juggernauts</div>
+        <p>Warriors only, specced for tankiness and damage. They absorb hits that would otherwise reach you and provide Armor Shred stacks via Aegisfall. In high corruption, the Dread Phalanx warriors serve as sacrificial tanks that buy time for DKs to execute.</p>
+        <ul>
+          <li><b>Dread Phalanx</b> — core damage/HP buff for warriors</li>
+          <li><b>Immortal</b> — 40% chance to resummon after death (pairs with Unbound Necromancy)</li>
+          <li><b>Bones of the Fallen</b> — minion health scaling</li>
+          <li>Avoid archer or mage variants — Warriors only for tanking</li>
+        </ul>
+      </div>
+
+      <div class="skill-card support">
+        <div class="skill-name">Summon Bone Golem</div>
+        <div class="skill-role">🏰 Support · Boss Tank / Shred Driver</div>
+        <p>One Bone Golem acts as your principal aggro-holder and physical damage dealer. With Aaron's Will equipped (see gear), you get up to 3 Golems — this transforms the build's durability against pinnacle content. Bone Shatter Retaliation makes the Golem deal physical damage every time it's hit, which is constant against bosses.</p>
+        <ul>
+          <li><b>Bone Fortress</b> — massive HP scaling for survivability</li>
+          <li><b>Bone Shatter Retaliation</b> — retaliation damage per hit taken</li>
+          <li><b>Barbed Construct</b> — more physical damage</li>
+          <li><b>Volatile Dead</b> — optional: explosions on death for clear speed</li>
+        </ul>
+      </div>
+
+      <div class="skill-card support">
+        <div class="skill-name">Dread Shade</div>
+        <div class="skill-role">⚡ Support · DPS Multiplier</div>
+        <p>Attach this to your strongest Death Knight and watch your clear speed explode. The Egoism node is what makes it exceptional — your chosen DK gets a massive More damage multiplier that scales harder the closer it is to dying. Phantasmal ensures the DK doesn't actually die, resetting the shade's attached target correctly.</p>
+        <ul>
+          <li><b>Egoism</b> — concentrated massive damage buff on one minion</li>
+          <li><b>Phantasmal</b> — Dread Shade no longer kills the attached minion</li>
+          <li><b>Lone Watcher</b> — shade duration extension, better uptime</li>
+          <li><b>Martyrdom</b> — flat armour to shaded minion per your Vitality (great survivability)</li>
+        </ul>
+      </div>
+
+      <div class="skill-card utility" style="border-color: rgba(124,79,207,0.5);">
+        <div class="skill-name">Bone Curse <span class="tag tag-key">Endgame Swap</span></div>
+        <div class="skill-role">🔻 Utility · Boss Armour Shred / Mark for Death</div>
+        <p>Optional swap-in for Summon Skeleton in deep endgame boss-kill scenarios. Bone Curse applied to a boss with Sigil of Mortality applies <b>Mark for Death</b> (−25% resistance), and with Merciless node applied to your Bone Golem, doubles its physical damage while cursed. Use situationally vs. pinnacle bosses; keep Summon Skeleton for general Monolith farming.</p>
+        <ul>
+          <li><b>Sigil of Mortality</b> — applies Mark for Death (−25% boss resistance)</li>
+          <li><b>Merciless</b> — Bone Cursed minions deal 2x physical damage</li>
+          <li><b>Defile Defenses</b> — Bone Curse application also shreds armor</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SKILL TREES -->
+  <div class="section">
+    <span class="section-anchor" id="skill-trees"></span>
+    <h2><span class="h2-icon">🌳</span>Skill Tree Node Allocation</h2>
+
+    <h3>Summon Skeletal Mage — Death Knight Path</h3>
+    <table class="node-table">
+      <thead><tr><th>Node</th><th>Points</th><th>Why / When</th></tr></thead>
+      <tbody>
+        <tr><td class="nd-name">Death Knights <span class="tag tag-core">Core</span></td><td class="nd-pts">1</td><td class="nd-why">Converts Skeletal Mages to DKs. Take immediately on specialisation.</td></tr>
+        <tr><td class="nd-name">Argonautic Speed</td><td class="nd-pts">3</td><td class="nd-why">Required pathing to Grave Passage in 1.4. Also gives DK movement speed.</td></tr>
+        <tr><td class="nd-name">Grave Passage <span class="tag tag-key">Key</span></td><td class="nd-pts">1</td><td class="nd-why"><b>Turns this skill into your blink.</b> Frees your 5th skill slot from Transplant. Path changed in 1.4 — now needs Argonautic Speed first.</td></tr>
+        <tr><td class="nd-name">Death's Cavalry</td><td class="nd-pts">3</td><td class="nd-why">Your whole army blinks with you (up to 9 minions). Essential for keeping formation in Omen Windows.</td></tr>
+        <tr><td class="nd-name">Leech Life <span class="tag tag-new">Buffed 1.4</span></td><td class="nd-pts">3–4</td><td class="nd-why">1% leech per point + 15% more HP per point (buffed from 0.5%). DKs are far sturdier in endgame with this maxed.</td></tr>
+        <tr><td class="nd-name">Celer Mortis</td><td class="nd-pts">3</td><td class="nd-why">Crit chance and movement speed. Enables DK crit scaling when combined with Necro tree nodes.</td></tr>
+        <tr><td class="nd-name">Death Blossom <span class="tag tag-new">S4 Rework</span></td><td class="nd-pts">1</td><td class="nd-why"><b>DKs cast your Hungering Souls tree every 6s.</b> Mandatory. Every HS point now buffs your DKs automatically.</td></tr>
+        <tr><td class="nd-name">Disciples of Necromancy</td><td class="nd-pts">1</td><td class="nd-why">+1 max Death Knight. Costs 3 passive points in Necro tree to unlock this effect, but worth it for one extra DK.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Hungering Souls — Death Blossom Synergy Tree</h3>
+    <table class="node-table">
+      <thead><tr><th>Node</th><th>Points</th><th>Why / When</th></tr></thead>
+      <tbody>
+        <tr><td class="nd-name">Consuming Souls <span class="tag tag-core">Core</span></td><td class="nd-pts">5</td><td class="nd-why">Flat necrotic damage — applies to both YOUR casts and every DK Death Blossom proc. Scale this first.</td></tr>
+        <tr><td class="nd-name">Haunting Souls</td><td class="nd-pts">3</td><td class="nd-why">Possessed enemies take increased damage. Your DKs re-apply possession constantly, maintaining the debuff.</td></tr>
+        <tr><td class="nd-name">Frenzied Skulls</td><td class="nd-pts">3</td><td class="nd-why">More projectiles per cast. More souls from each DK proc = higher AoE coverage and possession probability.</td></tr>
+        <tr><td class="nd-name">Infecting Grasp</td><td class="nd-pts">2</td><td class="nd-why">Longer possession duration — enemies stay debuffed between DK casts at the 6s cooldown window.</td></tr>
+        <tr><td class="nd-name">Soul Cleave</td><td class="nd-pts">1</td><td class="nd-why">AoE explosion when a possessed enemy dies. Great for pack clear — DKs trigger this constantly.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Summon Bone Golem — Tankiness Priority</h3>
+    <table class="node-table">
+      <thead><tr><th>Node</th><th>Points</th><th>Why / When</th></tr></thead>
+      <tbody>
+        <tr><td class="nd-name">Bone Fortress</td><td class="nd-pts">5</td><td class="nd-why">Massive HP bonus. With Aaron's Will giving 3 Golems, this makes each one a genuine tank.</td></tr>
+        <tr><td class="nd-name">Barbed Construct</td><td class="nd-pts">5</td><td class="nd-why">More physical damage for the Golem's hits and Bone Shatter.</td></tr>
+        <tr><td class="nd-name">Bone Shatter Retaliation</td><td class="nd-pts">1</td><td class="nd-why">Triggered AoE physical damage each time Golem is hit. Excellent boss DPS — bosses hit the Golem constantly.</td></tr>
+        <tr><td class="nd-name">Hulking Frame</td><td class="nd-pts">3</td><td class="nd-why">Larger Golem = more threat generation, enemies attack it preferentially.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Dread Shade — Egoism DK Buff</h3>
+    <table class="node-table">
+      <thead><tr><th>Node</th><th>Points</th><th>Why / When</th></tr></thead>
+      <tbody>
+        <tr><td class="nd-name">Egoism <span class="tag tag-core">Core</span></td><td class="nd-pts">1</td><td class="nd-why"><b>Huge more damage multiplier on one minion.</b> Shade concentrates its full buff onto your designated DK. Attach to your highest-DPS DK.</td></tr>
+        <tr><td class="nd-name">Phantasmal <span class="tag tag-key">Key</span></td><td class="nd-pts">1</td><td class="nd-why">Dread Shade no longer kills the minion it's attached to. Without this, Egoism is suicidal for the DK.</td></tr>
+        <tr><td class="nd-name">Martyrdom</td><td class="nd-pts">4</td><td class="nd-why">Flat armour to shaded minion per your Vitality. Stack Vitality on gear for free tankiness on your star DK.</td></tr>
+        <tr><td class="nd-name">Lone Watcher</td><td class="nd-pts">3</td><td class="nd-why">Extends shade duration. Better uptime = better DPS. Shade falls off if DK blinks far from you.</td></tr>
+        <tr><td class="nd-name">All For One</td><td class="nd-pts">3</td><td class="nd-why">Additional damage multiplier that scales the more minions you have. Zoo bonus applies even here.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PASSIVE TREES -->
+  <div class="section">
+    <span class="section-anchor" id="passives"></span>
+    <h2><span class="h2-icon">📊</span>Passive Tree Allocation — Full Breakdown</h2>
+
+    <div class="note warn">
+      <div class="note-icon">⚠️</div>
+      <div><b>1.3/1.4 Passive Tree Reality Check:</b> Undead Legion, Tyrant's Legion, and Disciples of Necromancy all cost <b>3 points each</b> to reach their threshold effects. Getting +1 skeleton max AND +1 DK max AND the skeleton count buff costs <b>at minimum 9 passive points</b> vs. 3 previously. Budget carefully — you'll need to skip some nice-to-have nodes.</div>
+    </div>
+
+    <div class="ptree-block">
+      <div class="ptree-header">
+        <span>Acolyte Base Tree</span>
+        <span class="ptree-pts">~20 Points</span>
+      </div>
+      <div class="prow"><span class="prow-name">Forbidden Knowledge</span><span class="prow-pts">8 pts</span><span class="prow-why">Intelligence = minion HP + damage + necrotic res. Scales your whole army passively. Fill this early.</span></div>
+      <div class="prow"><span class="prow-name">Blood Aura</span><span class="prow-pts">4 pts</span><span class="prow-why">Global minion damage. Applies to DKs, Golems, Skeletons simultaneously.</span></div>
+      <div class="prow"><span class="prow-name">Reclamation of Souls <span class="tag tag-key">Key</span></span><span class="prow-pts">5 pts</span><span class="prow-why"><b>Ward on minion death.</b> Your primary Ward income in early-mid endgame. At high corruption, your frontline warriors die occasionally — every death generates Ward for you.</span></div>
+      <div class="prow"><span class="prow-name">Unnatural Preservation</span><span class="prow-pts">3 pts</span><span class="prow-why">Ward Retention + Necrotic/Poison resistance. Locks in your Ward efficiency.</span></div>
+    </div>
+
+    <div class="ptree-block">
+      <div class="ptree-header">
+        <span>Necromancer Mastery Tree</span>
+        <span class="ptree-pts">~60 Points Priority Order</span>
+      </div>
+      <div class="prow"><span class="prow-name">Risen Army <span class="tag tag-core">Core</span></span><span class="prow-pts">8 pts</span><span class="prow-why"><b>Increased minion damage and cast speed.</b> The single highest-value DPS node on the tree. Max this before everything else.</span></div>
+      <div class="prow"><span class="prow-name">Cursed Blood</span><span class="prow-pts">6 pts</span><span class="prow-why">Minion necrotic/physical damage. Required pathing to Aegisfall. Don't skip.</span></div>
+      <div class="prow"><span class="prow-name">Aegisfall <span class="tag tag-core">Core</span></span><span class="prow-pts">5 pts</span><span class="prow-why"><b>ALL minions inflict Armor Shred on hit.</b> With 5 pts you get 200% chance, which is overkill but guarantees stacks per hit. 4 pts is the sweet spot — see mechanic note below.</span></div>
+      <div class="prow"><span class="prow-name">Mortal Tether</span><span class="prow-pts">5 pts</span><span class="prow-why">Minion health. Required pathing. At 300+ corruption, your DKs need this to survive one-shot scenarios.</span></div>
+      <div class="prow"><span class="prow-name">Marrow Tap <span class="tag tag-new">Buffed 1.4</span></span><span class="prow-pts">4 pts</span><span class="prow-why"><b>+15% Physical Resistance per point</b> (buffed from +10%). Take 4 pts for 60% physical resistance on your character. Massive survivability node at high corruption.</span></div>
+      <div class="prow"><span class="prow-name">River of Bones</span><span class="prow-pts">5 pts</span><span class="prow-why">Minion leech rate + critical strike chance for minions. Essential for sustain at high corruption.</span></div>
+      <div class="prow"><span class="prow-name">Sharpened Bones</span><span class="prow-pts">5 pts</span><span class="prow-why">+1% minion crit chance per point. Replaced Soul Drinker in 1.3. Push toward 100% crit on DKs.</span></div>
+      <div class="prow"><span class="prow-name">Blades of the Forlorn</span><span class="prow-pts">5–8 pts</span><span class="prow-why">Minion crit multiplier + chill chance. The payoff node once you have solid crit chance. Take in endgame.</span></div>
+      <div class="prow"><span class="prow-name">Undead Legion</span><span class="prow-pts">3 pts</span><span class="prow-why">Threshold effect at 3pts = +1 max skeleton. Costs 3 points in 1.3+. Only take if you need the count.</span></div>
+      <div class="prow"><span class="prow-name">Disciples of Necromancy</span><span class="prow-pts">3 pts</span><span class="prow-why">Threshold at 3pts = +1 max Death Knight. 3 point cost is steep but DKs are your primary DPS — worth it.</span></div>
+      <div class="prow"><span class="prow-name">Moonlight Pyre</span><span class="prow-pts">5–10 pts</span><span class="prow-why">Flat fire + necrotic damage for minions. Excellent late-game scaling when you have the point budget.</span></div>
+      <div class="prow"><span class="prow-name">Frantic Summons</span><span class="prow-pts">3–5 pts</span><span class="prow-why">Cast speed for you AND minions. DKs attack faster, Hungering Souls procs faster, Golems hit faster.</span></div>
+      <div class="prow"><span class="prow-name">Veins of Malice</span><span class="prow-pts">5 pts (threshold)</span><span class="prow-why">At 3-pt threshold: "When you cast a spell, sacrifice 5% of current HP to give minions Haste and Frenzy for 5 seconds." Cast Hungering Souls = your whole army is frenzied. Excellent but late game only — HP cost matters at high corruption.</span></div>
+      <div class="prow"><span class="prow-name">Dark Retribution</span><span class="prow-pts">1 pt</span><span class="prow-why">Spawn Skeleton Vanguards on minion death. Free bonus units. Synergises with Reclamation of Souls (more deaths = more Ward + more Vanguards).</span></div>
+      <div class="prow"><span class="prow-name">Forbidden Teachings</span><span class="prow-pts">5 pts</span><span class="prow-why">New node: +1 Int and +1 Vit per point. 3-pt threshold: 1% more minion crit per Int AND 1% more minion DoT per Vit. If building Int heavily, this has synergy.</span></div>
+    </div>
+
+    <div class="mechanic-box">
+      <div class="mechanic-title">⚙️ Mechanic Note: Aegisfall and Armor Shred Diminishing Returns</div>
+      <p>Armor Shred has diminishing returns above ~50–70 stacks. At 200% chance per hit, a 5-minion army will stack well beyond that immediately. Taking 4 points (160% chance) instead of 5 is nearly identical in practice. The extra passive point is better spent elsewhere. Track stacks on bosses briefly early on to confirm you're hitting 50+ — if so, drop Aegisfall to 4 pts.</p>
+    </div>
+  </div>
+
+  <!-- SYNERGIES -->
+  <div class="section">
+    <span class="section-anchor" id="synergies"></span>
+    <h2><span class="h2-icon">🔗</span>Key Synergies</h2>
+
+    <div class="syn-grid">
+      <div class="syn-card">
+        <div class="syn-a">Death Blossom (DK tree node)</div>
+        <div class="syn-arrow">⇅</div>
+        <div class="syn-b">Your Hungering Souls skill tree</div>
+        <div class="syn-desc">Every HS point invested scales every DK proc. With 3 DKs each firing every 6s, that's up to 30 soul-casts per minute you didn't cast. Pure free damage.</div>
+      </div>
+      <div class="syn-card">
+        <div class="syn-a">Aegisfall (Necro passive)</div>
+        <div class="syn-arrow">⇅</div>
+        <div class="syn-b">5+ minions hitting simultaneously</div>
+        <div class="syn-desc">Every melee hit and spell hit from the army applies Armor Shred. Against bosses, enemies reach 70+ stacks within 2 seconds. Physical resistance effectively becomes 0.</div>
+      </div>
+      <div class="syn-card">
+        <div class="syn-a">Grave Passage blink</div>
+        <div class="syn-arrow">⇅</div>
+        <div class="syn-b">Death's Cavalry (army teleport)</div>
+        <div class="syn-desc">One blink keystroke repositions your entire army instantly. Essential for Omen Windows (return to ring), boss repositioning, and keeping formation through map transitions.</div>
+      </div>
+      <div class="syn-card">
+        <div class="syn-a">Egoism + Dread Shade</div>
+        <div class="syn-arrow">⇅</div>
+        <div class="syn-b">Death Blossom DK as host</div>
+        <div class="syn-desc">Your Dread Shade DK is simultaneously getting a massive More damage buff AND firing Hungering Souls every 6s using your HS tree. One minion becomes a walking artillery platform.</div>
+      </div>
+      <div class="syn-card">
+        <div class="syn-a">Reclamation of Souls (Ward on death)</div>
+        <div class="syn-arrow">⇅</div>
+        <div class="syn-b">Immortal / Unbound Necromancy (resummon)</div>
+        <div class="syn-desc">Skeleton dies → you gain Ward → it resurrects via Immortal. At high corruption, frequent skeleton deaths become a Ward battery, with your army auto-healing itself.</div>
+      </div>
+      <div class="syn-card">
+        <div class="syn-a">Veins of Malice (cast spell = Frenzy)</div>
+        <div class="syn-arrow">⇅</div>
+        <div class="syn-b">Hungering Souls cast</div>
+        <div class="syn-desc">Cast HS → sacrifice 5% HP → entire army gets Haste + Frenzy for 5 seconds. Do this before every boss pull. 5% HP cost is negligible in softcore with Ward generation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVELING -->
+  <div class="section">
+    <span class="section-anchor" id="leveling"></span>
+    <h2><span class="h2-icon">📈</span>Leveling Roadmap</h2>
+
+    <div class="note tip">
+      <div class="note-icon">💡</div>
+      <div>As a veteran, you know the drill. This is a speedrun summary: no fluff, no hand-holding, just the decisions that matter for maximising your first-week trajectory into high corruption.</div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-range">Level 1–12 · Act 1</div>
+        <div class="tl-title">Skeletons + Wandering Spirits placeholder</div>
+        <div class="tl-body"><b>Summon Skeleton</b> immediately, max skeletons. Use <b>Wandering Spirits</b> for AoE until Hungering Souls is available (level 5 unlock). Passives: Forbidden Knowledge rush → Blood Aura. This phase is trivial — spam Summon Skeleton and walk forward.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-range">Level 12–20 · Mastery → Necromancer</div>
+        <div class="tl-title">Specialise Skeletal Mage, lock in Death Knights</div>
+        <div class="tl-body">Choose Necromancer. Immediately start filling Risen Army. Specialise Summon Skeletal Mage as a second skill slot — navigate to <b>Death Knights</b> node ASAP. Keep Transplant for movement until you unlock Grave Passage. Replace Wandering Spirits with <b>Hungering Souls</b>. Start Summon Bone Golem as 4th slot.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-range">Level 20–40 · Campaign Drive</div>
+        <div class="tl-title">Death Blossom + Grave Passage online = full kit</div>
+        <div class="tl-body">Priority: get <b>Argonautic Speed → Grave Passage → Death's Cavalry</b> in Skeletal Mage tree. Then grab <b>Death Blossom</b>. Simultaneously unlock <b>Dread Shade</b> as 5th skill, take Egoism + Phantasmal immediately. Remove Transplant from bar — Grave Passage replaces it. <b>Passives:</b> Cursed Blood → Aegisfall (4 pts). You'll feel a major power spike here. Start Reclamation of Souls for Ward.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-range">Level 40–55 · Campaign Completion</div>
+        <div class="tl-title">Resistances + Crafting Foundation</div>
+        <div class="tl-body">Campaign is a blur at this stage. Focus craft-checks: <b>cap resistances to 75%</b>, prioritise Void and Necrotic first (most prevalent campaign damage types). Start building out <b>Hungering Souls tree</b> — Consuming Souls + Haunting Souls. <b>Passives:</b> Mortal Tether (5 pts), Marrow Tap (4 pts in 1.4 for 60% physical res — big defensive spike). Begin leveling Bone Golem tree toward Bone Fortress.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-range">Level 55–75 · Early Monolith</div>
+        <div class="tl-title">Empowered Unlock + Omen Window Farming</div>
+        <div class="tl-body">Push the three normal timelines: <b>Fall of the Outcast, Reign of Dragons, Blood Frost and Death</b>. Unlock empowered at 100 corruption. Key gear hunts: <b>Aaron's Will</b> (Blood Frost and Death timeline) for 3 Golems, <b>Hollow Finger rings</b> for skeleton count. Get <b>Veins of Malice</b> threshold (5pts) once you have solid HP — the Frenzy proc on HS cast is a major DPS buff. Begin Omen Windows for Idol Altars and Timeglass Fragments.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-range">Level 75–100 · Corruption Climb</div>
+        <div class="tl-title">Crit Build-Out + Deep Corruption</div>
+        <div class="tl-body">Finalise passive tree toward 100% minion crit: River of Bones + Sharpened Bones + Blades of the Forlorn + Celer Mortis (DK tree). Get <b>Twisted Heart of Uhkeiros</b> relic for Ward generation upgrade path. Use <b>Bone Curse</b> on difficult boss pulls. Farm Echo Chains — Nemesis Chains and Omen Window Chains are most efficient for Corruption push. By 300+ corruption, your DKs with a 100% crit build and Dread Shade Egoism should be clearing in 3–5 second bursts.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GEAR -->
+  <div class="section">
+    <span class="section-anchor" id="gear"></span>
+    <h2><span class="h2-icon">⚔️</span>Gear Guide — Priority Order</h2>
+
+    <div class="note tip">
+      <div class="note-icon">💡</div>
+      <div><b>Affix priority on rares:</b> (1) Minion Damage, (2) Minion Health, (3) Resistances for you, (4) Vitality (scales Dread Shade Martyrdom and your HP). Avoid spreading too thin — this build needs minion stats, not cast speed or other self-stats.</div>
+    </div>
+
+    <table class="gear-table">
+      <thead>
+        <tr><th>Slot</th><th>Best-in-Slot Target</th><th>Starter Rare Affixes</th><th>Where to Farm</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="g-slot">Chest</td>
+          <td><span class="g-unique">Aaron's Will</span><br><small style="color:var(--dim)">+2 max Bone Golems (total 3). This is the build's biggest single upgrade. Golems give Ward on kill too. Pair with Hollow Fingers for max golem+skeleton count.</small></td>
+          <td><span class="g-rare">Minion HP, Armor, Vitality</span></td>
+          <td>Blood, Frost & Death Timeline</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Helm</td>
+          <td><span class="g-unique">Boneclamor Barbute</span><br><small style="color:var(--dim)">+1 to Acolyte skills, Ward, all-res. Bilder's Funeral Mask also excellent for minion crit chance.</small></td>
+          <td><span class="g-rare">+Levels to Summon Skeletal Mage or Skeleton, Minion Damage</span></td>
+          <td>Rare craft or Outcast Timeline</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Rings (×2)</td>
+          <td><span class="g-unique">Hollow Finger × 2</span><br><small style="color:var(--dim)">+1 max skeleton each. Both rings = +2 max skeletons. Critical for army size given the passive point cost for skeleton counts.</small></td>
+          <td><span class="g-rare">Minion Damage, Resistance, Vitality</span></td>
+          <td>Imperial Era Timeline</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Relic</td>
+          <td><span class="g-unique">Twisted Heart of Uhkeiros</span><br><small style="color:var(--dim)">Converts your health to Ward (with Rip Blood). Enables near-infinite Ward scaling at high corruption and eliminates the reliance on minion death for Ward. Endgame BiS.</small></td>
+          <td><span class="g-rare">Minion Crit Multi, Minion Necrotic Damage</span></td>
+          <td>Stolen Lance Timeline</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Relic alt</td>
+          <td><span class="g-unique">Prophetic Homonculus</span> (S4 Corruption new)<br><small style="color:var(--dim)">61–77% Necrotic + Void Resistance with armor penalty. Completely solves Necrotic/Void resist capping. Excellent starter relic before Twisted Heart.</small></td>
+          <td><span class="g-rare">Minion Spell Damage, Minion Crit Chance</span></td>
+          <td>Omen Window drops</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Amulet</td>
+          <td>Rare or <span class="g-unique">Death Rattle</span><br><small style="color:var(--dim)">Death Rattle gives +1 Acolyte skills with downside. Most important affix is +1 to all skills (prefix) — the most efficient upgrade to every minion skill simultaneously.</small></td>
+          <td><span class="g-rare">+1 to All Skills (prefix), Minion Damage, All Resistance</span></td>
+          <td>Craft or any timeline</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Weapon</td>
+          <td>1H Wand + Shield or 1H Scepter<br><small style="color:var(--dim)">Julra's Obsession (wand) — one of the best minion weapons. +flat spell damage to minions is otherwise nearly unobtainable. BiS weapon for DK hybrid casters.</small></td>
+          <td><span class="g-rare">Minion Damage (prefix), +1 to Minion Skills (prefix)</span></td>
+          <td>Julra's Obsession: Temporal Sanctum</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Shield</td>
+          <td>Rare preferred or <span class="g-unique">Sinathia's Shield</span> (S4 Set)<br><small style="color:var(--dim)">Sinathia's Set shield provides synergy with DK conversions. Rare shield with Block Chance + Minion HP is fine starter.</small></td>
+          <td><span class="g-rare">Block Chance, Minion HP, Resistance</span></td>
+          <td>Any timeline / crafted</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Gloves</td>
+          <td>Rare</td>
+          <td><span class="g-rare">Minion Damage, Minion Crit Chance, Minion Attack Speed</span></td>
+          <td>Crafted</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Belt</td>
+          <td>Rare (or S4 Singularity Belt from Corruption)</td>
+          <td><span class="g-rare">Health, Vitality, Resistances, Potion Slots</span></td>
+          <td>Crafted / Omen drops</td>
+        </tr>
+        <tr>
+          <td class="g-slot">Boots</td>
+          <td>Rare (with +Move Speed prefix)</td>
+          <td><span class="g-rare">25%+ Movement Speed, Resistance, Minion HP</span></td>
+          <td>Crafted</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note new">
+      <div class="note-icon">🆕</div>
+      <div><b>Season 4 Rune of Corruption:</b> Once you have a well-crafted piece with T4+ minion damage, consider gambling a Rune of Corruption on it. The best-case outcomes (affix tier upgrades, new subtypes like Cursed Coin Amulet with +1 to all skills) can produce BiS items. The risk: it's permanent — the item cannot be modified afterward. Use on items you're replacing anyway, or duplicates.</div>
+    </div>
+  </div>
+
+  <!-- BLESSINGS -->
+  <div class="section">
+    <span class="section-anchor" id="blessings"></span>
+    <h2><span class="h2-icon">✨</span>Monolith Blessings Priority</h2>
+
+    <div class="two-col">
+      <div class="info-box">
+        <div class="info-box-title">Grand Blessings — High Priority</div>
+        <ul>
+          <li><span class="g-bless">Grand Flames of the Black Sun</span> — Minion Necrotic Dmg (Black Sun)</li>
+          <li><span class="g-bless">Grand Spirits of Fire</span> — Minion Fire Dmg if using Pyre Golem variant</li>
+          <li><span class="g-bless">Grand Survival of the Erased</span> — Minion HP % (Stolen Lance)</li>
+          <li><span class="g-bless">Grand Strength of the Pack</span> — Minion Physical Dmg (Blood Frost)</li>
+          <li><span class="g-bless">Grand Bulwark of the Tundra</span> — Armor (personal survivability)</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <div class="info-box-title">Secondary / Resistance Fillers</div>
+        <ul>
+          <li><span class="g-bless">Grand Body of Obsidian</span> — Increased Armor</li>
+          <li><span class="g-bless">Grand Retaliation of Souls</span> — Ward Retention</li>
+          <li><span class="g-bless">Grand Reach of the Void</span> — Void Resistance (use to cap)</li>
+          <li><span class="g-bless">Grand Dragonfire</span> — Fire Resistance (use to cap)</li>
+          <li>Fill remaining slots with whatever resistances aren't capped on gear</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIGH CORRUPTION -->
+  <div class="section">
+    <span class="section-anchor" id="endgame"></span>
+    <h2><span class="h2-icon">🏆</span>Pushing High Corruption — 300–500+</h2>
+
+    <div class="note danger">
+      <div class="note-icon">💀</div>
+      <div><b>The honest wall:</b> At 300+ corruption, enemies can oneshot. Your survivability relies on: (1) Army drawing all aggro, (2) Ward generation from minion deaths + Reclamation of Souls, (3) Twisted Heart of Uhkeiros if using Low Life path, (4) Marrow Tap physical resistance (60% physical res from 4 pts in 1.4 is massive). If you're dying frequently, fix resistances first, then crit cap your minions to kill faster (best defense is offense at high corruption).</div>
+    </div>
+
+    <h3>The Corruption Push Checklist</h3>
+    <ul class="pri-list">
+      <li><span class="pri-num">1</span><div><b>All resistances at 75%</b> minimum. At 300+ corruption, uncapped resistance is instant death. Use blessings to fill gaps before pushing further.</div></li>
+      <li><span class="pri-num">2</span><div><b>60% physical resistance</b> from 4× Marrow Tap (1.4 buffed to +15/pt). This is the most important defensive layer for melee-heavy Monolith content and many boss attacks.</div></li>
+      <li><span class="pri-num">3</span><div><b>Minion crit at 100%</b>. Combine River of Bones + Sharpened Bones + Celer Mortis (DK tree) + Heresy (Necro passive). Critting minions kill fast enough that most threats die before they reach you.</div></li>
+      <li><span class="pri-num">4</span><div><b>Julra's Obsession equipped.</b> The flat spell damage it provides to minions is multiplicative with your other scaling — DKs fire 40–60% harder with it equipped than with a rare wand.</div></li>
+      <li><span class="pri-num">5</span><div><b>Aaron's Will equipped</b> for 3 Golems. Three Golems generate three times the aggro, three times the Bone Shatter, and three times the Ward from kills. Biggest single item upgrade for both offense and defense.</div></li>
+      <li><span class="pri-num">6</span><div><b>Pre-cast Veins of Malice before every boss.</b> Cast Hungering Souls immediately on entering boss arena → army gets Haste + Frenzy. Stack with your boss-pull Bone Curse for maximum burst damage.</div></li>
+      <li><span class="pri-num">7</span><div><b>Shade management.</b> After each blink, confirm Dread Shade is still on your target DK (it can de-attach when the host blinks away). Re-attach immediately after repositioning.</div></li>
+      <li><span class="pri-num">8</span><div><b>Omen Window Chains</b> for fast corruption gain. <em class="glow">Pinnacle of Chaos</em> chain echoes guarantee both an Omen Window AND a roaming Omen per echo — highest corruption/time ratio in Season 4.</div></li>
+    </ul>
+
+    <div class="note tip">
+      <div class="note-icon">💡</div>
+      <div><b>Twisted Heart of Uhkeiros Low-Life endgame path (optional):</b> Adding Rip Blood to your skill bar (specialised for necrotic damage + self-hit) with Twisted Heart converts your health into Ward constantly. This enables a near-passive Ward regeneration loop that makes you effectively invulnerable to any non-oneshot at 400+ corruption. It requires dropping one of your five skills (typically Bone Curse or Summon Skeleton) and is a meaningful complexity jump, but it is the standard endgame defensive layer for high-corruption Necromancer builds.</div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="section">
+    <span class="section-anchor" id="tips"></span>
+    <h2><span class="h2-icon">💡</span>Veteran Tips — Things the Guides Don't Say</h2>
+
+    <ul class="pri-list">
+      <li><span class="pri-num">✓</span><div><b>Don't over-summon on zone entry.</b> Use the 'A' key to point your DKs at the first pack, let them kill it, then blink forward. Over-blinking ahead of your army disconnects them and loses the Dread Shade target. Lead deliberately.</div></li>
+      <li><span class="pri-num">✓</span><div><b>Armor Shred tracking matters.</b> Open the combat log briefly on a boss. If you're seeing 80+ Shred stacks, drop 1 point from Aegisfall and put it into Moonlight Pyre or Sharpened Bones. Diminishing returns above 70 stacks are steep.</div></li>
+      <li><span class="pri-num">✓</span><div><b>Dread Shade reattachment macro.</b> After Grave Passage blinks, click your best DK with Dread Shade within 2 seconds. The shade only lasts ~8 seconds — losing uptime on Phantasmal+Egoism costs significant DPS.</div></li>
+      <li><span class="pri-num">✓</span><div><b>Minion Power scaling:</b> At level 100, minions receive <b>60% more damage and 60% less damage taken</b> multiplicatively from the Minion Power passive system. This alone makes level 100 minions roughly double the effective power of level 70 minions — don't panic if DKs feel weak at 65–70, they scale hard with levels.</div></li>
+      <li><span class="pri-num">✓</span><div><b>Individual Operator node rework in 1.4:</b> Skeleton Rogues now deal 25% more damage per point for each Warrior/Archer you control. If you ever run Rogues, this is worth knowing — but for this build, stick to Warriors via Dread Phalanx for tanking.</div></li>
+      <li><span class="pri-num">✓</span><div><b>Omen Window ring mechanics:</b> Stay in the ring, but your minions will chase enemies outside of it. Use 'A' key to drag enemies back toward the ring center if they're scattering. The ring countdown only ticks when <em>you</em> leave, not your minions.</div></li>
+      <li><span class="pri-num">✓</span><div><b>Corrupted Idol Altars are high priority.</b> The Idol Altar changes your entire grid shape, potentially opening more large Idol slots. Get one within your first few Omen Window encounters — a reshaped grid with better Idol placement is a free 15–20% damage upgrade with no gear farming required.</div></li>
+      <li><span class="pri-num">✓</span><div><b>Forgot a passive? Re-spec is cheap.</b> Since 1.2, you can change Mastery for a gold cost. If you accidentally dump points into the wrong branch, don't abandon the build — you can freely respec passive nodes at any respec NPC. Build correct first, optimise at level 100.</div></li>
+    </ul>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Death Knight Necromancer · Season 4: Shattered Omens · Patch 1.4 · Season Start March 26, 2026</p>
+    <p>Built from official 1.4 patch notes, Maxroll 1.4 summary, forum passive tree analysis, and multi-season build theory. Node values subject to day-one hotfixes.</p>
+    <p class="glow" style="margin-top: 12px;">☽ The dead need no rest. Neither should your corruption counter. ☽</p>
+  </div>
+
+</div>
+</body>
+</html>
