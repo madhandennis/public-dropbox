@@ -1,0 +1,170 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0;display:flex;flex-direction:column;gap:1.5rem}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.85rem 1rem}
+.card .label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.card .value{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.card .sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bar-label{font-size:13px;color:var(--color-text-secondary);width:140px;flex-shrink:0;text-align:right}
+.bar-track{flex:1;background:var(--color-background-secondary);border-radius:4px;height:14px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .3s}
+.bar-val{font-size:12px;color:var(--color-text-secondary);width:52px;flex-shrink:0}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:var(--border-radius-md);margin:3px 3px 3px 0}
+.tag-ok{background:#EAF3DE;color:#3B6D11}
+.tag-warn{background:#FAEEDA;color:#854F0B}
+.tag-crit{background:#FCEBEB;color:#A32D2D}
+.tag-info{background:#E6F1FB;color:#185FA5}
+.pill-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:.5rem}
+.divider{border:none;border-top:.5px solid var(--color-border-tertiary)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.insight{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.85rem 1rem}
+.insight .heading{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:.4rem}
+.insight p{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+@media(max-width:520px){.two-col{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+
+<div>
+  <div class="section-title">offense snapshot</div>
+  <div class="cards">
+    <div class="card"><div class="label">Melee crit chance</div><div class="value">97%</div><div class="sub">effectively capped</div></div>
+    <div class="card"><div class="label">Throwing crit multi</div><div class="value">548%</div><div class="sub">vs 453% melee</div></div>
+    <div class="card"><div class="label">Melee attack speed</div><div class="value">+70%</div><div class="sub">56% throwing</div></div>
+    <div class="card"><div class="label">Phys penetration</div><div class="value">~80%</div><div class="sub">Dancing+Shuriken nodes</div></div>
+    <div class="card"><div class="label">All-in crit multi bonus</div><div class="value">+75%</div><div class="sub">-25% non-crit dmg</div></div>
+    <div class="card"><div class="label">Max Perfection bonus</div><div class="value">+100%</div><div class="sub">10 stacks × 10%</div></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div>
+  <div class="section-title">offense scaling — what moves the needle most</div>
+  <div style="margin-top:.25rem">
+    <div class="bar-row"><span class="bar-label">Crit multiplier</span><div class="bar-track"><div class="bar-fill" style="width:95%;background:#7F77DD"></div></div><span class="bar-val">453–548%</span></div>
+    <div class="bar-row"><span class="bar-label">Flow 100% more dmg</span><div class="bar-track"><div class="bar-fill" style="width:88%;background:#7F77DD"></div></div><span class="bar-val">multiplicative</span></div>
+    <div class="bar-row"><span class="bar-label">Perfection stacks</span><div class="bar-track"><div class="bar-fill" style="width:80%;background:#7F77DD"></div></div><span class="bar-val">up to +100%</span></div>
+    <div class="bar-row"><span class="bar-label">Confidence (full HP)</span><div class="bar-track"><div class="bar-fill" style="width:72%;background:#534AB7"></div></div><span class="bar-val">+60% dmg</span></div>
+    <div class="bar-row"><span class="bar-label">Asuvon's Pact (full HP)</span><div class="bar-track"><div class="bar-fill" style="width:55%;background:#534AB7"></div></div><span class="bar-val">+45% (3×15%)</span></div>
+    <div class="bar-row"><span class="bar-label">Phys % damage (melee)</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:#AFA9EC"></div></div><span class="bar-val">+383%</span></div>
+    <div class="bar-row"><span class="bar-label">Rhythm (passive)</span><div class="bar-track"><div class="bar-fill" style="width:42%;background:#AFA9EC"></div></div><span class="bar-val">+50% w/ Flow</span></div>
+    <div class="bar-row"><span class="bar-label">Shadow Torrent (4×12%)</span><div class="bar-track"><div class="bar-fill" style="width:30%;background:#AFA9EC"></div></div><span class="bar-val">+48% w/ 4 shadows</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div>
+  <div class="section-title">offense — gaps & upgrade opportunities</div>
+  <div class="two-col">
+    <div class="insight">
+      <div class="heading">Throwing crit multi gap</div>
+      <p>Throwing sits at 548% vs melee 453%. Bladestorm and Shurikens are your primary damage dealers — stacking throwing crit multi further (Traitor's Tongue LP, rings) is your highest-leverage offensive upgrade.</p>
+    </div>
+    <div class="insight">
+      <div class="heading">Dagger count for Flow State</div>
+      <p>Flow State on Shadow Cascade gives +15% per dagger. You're dual-wielding two daggers — that's +30% more damage on Shadow Cascade already applied. Good synergy.</p>
+    </div>
+    <div class="insight">
+      <div class="heading">Leveraged Momentum undervalued</div>
+      <p>Only 3/3 allocated but gives +0.6% per 1% melee attack speed. With 70% increased melee speed, that's ~42% more damage on Shadow Cascade from this node alone. Good investment.</p>
+    </div>
+    <div class="insight">
+      <div class="heading">Dexterity is low (33)</div>
+      <p>Dex scales Dancing Strikes, Bladestorm, Shadow Cascade, and Shurikens at 4% damage per point. Velocyn's Jaw gives +3-4 to Dex skills and +10-16 Dex — at 33 Dex, you're leaving significant damage on the table. Pushing Dex to 50+ should be a gear priority.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div>
+  <div class="section-title">defense snapshot</div>
+  <div class="cards">
+    <div class="card"><div class="label">Health</div><div class="value">2,580</div><div class="sub">EHP vs phys: 6,228</div></div>
+    <div class="card"><div class="label">Endurance</div><div class="value">57%</div><div class="sub">threshold: 516</div></div>
+    <div class="card"><div class="label">Crit avoidance</div><div class="value">135%</div><div class="sub">fully capped ✓</div></div>
+    <div class="card"><div class="label">Glancing blow</div><div class="value">31%</div><div class="sub">good, room to grow</div></div>
+    <div class="card"><div class="label">Dodge chance</div><div class="value">15%</div><div class="sub">458 rating</div></div>
+    <div class="card"><div class="label">Physical res</div><div class="value">92%</div><div class="sub">overcapped ✓</div></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div>
+  <div class="section-title">resistance coverage</div>
+  <div style="margin-top:.25rem">
+    <div class="bar-row"><span class="bar-label">Physical</span><div class="bar-track"><div class="bar-fill" style="width:92%;background:#1D9E75"></div></div><span class="bar-val">92% ✓</span></div>
+    <div class="bar-row"><span class="bar-label">Necrotic</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#1D9E75"></div></div><span class="bar-val">104% ✓</span></div>
+    <div class="bar-row"><span class="bar-label">Fire</span><div class="bar-track"><div class="bar-fill" style="width:84%;background:#1D9E75"></div></div><span class="bar-val">84% ✓</span></div>
+    <div class="bar-row"><span class="bar-label">Cold</span><div class="bar-track"><div class="bar-fill" style="width:84%;background:#1D9E75"></div></div><span class="bar-val">84% ✓</span></div>
+    <div class="bar-row"><span class="bar-label">Lightning</span><div class="bar-track"><div class="bar-fill" style="width:84%;background:#1D9E75"></div></div><span class="bar-val">84% ✓</span></div>
+    <div class="bar-row"><span class="bar-label">Poison</span><div class="bar-track"><div class="bar-fill" style="width:83%;background:#EF9F27"></div></div><span class="bar-val">83% ⚠</span></div>
+    <div class="bar-row"><span class="bar-label">Void</span><div class="bar-track"><div class="bar-fill" style="width:77%;background:#E24B4A"></div></div><span class="bar-val">77% ✗</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div>
+  <div class="section-title">defense — gaps & upgrade opportunities</div>
+  <div class="two-col">
+    <div class="insight">
+      <div class="heading">Void resistance is the weak point</div>
+      <p>At 77% you are noticeably under the 75% soft cap but still exposed. Rings currently cover Necrotic and Poison — adding Void to one ring or upgrading Omnis rolls would close this. Priority: high.</p>
+    </div>
+    <div class="insight">
+      <div class="heading">Dodge is low for a Bladedancer</div>
+      <p>15% dodge chance from 458 rating is modest. Perfection + Confidence add armor/dodge per stack (+60 each at 10 stacks = +600 rating) making this much better in combat, but the base is thin. More Dex = more from Nimble on Dancing Strikes too.</p>
+    </div>
+    <div class="insight">
+      <div class="heading">Health could be higher</div>
+      <p>2,580 HP is on the lower end for endgame. Woven Flesh and the helmet contribute %, but the base health pool is fragile before Endurance kicks in. The idol Large Shadow slots have health % prefixes — upgrading those is easy health.</p>
+    </div>
+    <div class="insight">
+      <div class="heading">Full-health dependency risk</div>
+      <p>Confidence (+60% dmg at full HP), Asuvon's Pact (damage tripled at full HP), and All In create massive conditional bonuses — but you lose Perfection stacks on any hit. Smoke Bomb's Moonlight Bomb (Silver Shroud) and Cloaked Incursion help maintain this but it's a fragile playstyle at high corruption.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div>
+  <div class="section-title">shadow engine health check</div>
+  <div class="pill-row">
+    <span class="tag tag-ok">Umbral Assault: 100% shadow/sec in smoke</span>
+    <span class="tag tag-ok">Skiasynthesis: 90 HP on shadow creation</span>
+    <span class="tag tag-ok">Shadow Master: +4 max shadows (3+1)</span>
+    <span class="tag tag-ok">Gloomstalker: 40% shadow on kill</span>
+    <span class="tag tag-ok">Shadowstorm: cascade triggers bladestorm hits</span>
+    <span class="tag tag-ok">Fight in the Shadows: +12 mana per shadow</span>
+    <span class="tag tag-warn">Careful Assault: needs 2+ shadows active</span>
+    <span class="tag tag-warn">Shadow Torrent: only value with shadows up</span>
+    <span class="tag tag-info">Skiasynthesis shadow dmg: 190% (90+100)</span>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div>
+  <div class="section-title">unspent points — what to consider</div>
+  <div class="two-col">
+    <div class="insight">
+      <div class="heading">4 passive points unspent</div>
+      <p>Flow (2→5 pts): worth it for the dodge rating. Once (5→8 pts): +6 flat phys melee/throwing. Resilience (1→8 pts): more health and crit avoidance — already at 135% so low priority.</p>
+    </div>
+    <div class="insight">
+      <div class="heading">5 skill spec points (1 per skill)</div>
+      <p>Dancing: Slicing to 5/5 (+8% phys pen). Shurikens: Alacrity to 5/5 (+10% attack speed). Smoke Bomb: Lingering Fumes to 5/5 (+20% duration). Shadow Cascade: Carnage to 4/4 (+60% crit multi total).</p>
+    </div>
+  </div>
+</div>
+
+</div>
